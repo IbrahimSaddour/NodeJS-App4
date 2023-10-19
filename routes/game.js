@@ -1,5 +1,5 @@
 import express from "express"
-import { addOnce, deleteAll, deleteOnce, getAll, getOnce, getOnceById, patchOnce, putAll} from "../controllers/game.js";
+import { addOnce, deleteAll, deleteOnce, getAll, getOnce, getOnceById, patchOnce, putAll } from "../controllers/game.js";
 
 
 
@@ -68,8 +68,8 @@ const router = express.Router();
 router
     .route('/')
     .get(getAll)
-    .post(addOnce)
-    .delete(deleteAll)
+//.post(addOnce)
+//.delete(deleteAll)
 
 router
     .route('/:name')
@@ -78,8 +78,8 @@ router
     .patch(patchOnce)
     .delete(deleteOnce)
 
-router
-    .route('/:id')
-    .get(getOnceById)
+//router
+//  .route('/:id')
+// .get(getOnceById)
 
 export default router;

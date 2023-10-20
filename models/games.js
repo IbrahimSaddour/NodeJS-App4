@@ -21,6 +21,10 @@ const gameSchema = new Schema(
             type: Number,
             required: true
         },
+        image: {
+            type: String,
+            required: true
+        },
         onSale: {
             type: Boolean,
             required: true

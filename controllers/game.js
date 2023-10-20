@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import Game from '../models/games.js'
 
 
@@ -34,15 +35,41 @@ import Game from '../models/games.js'
 // Create
 
 //avec la methode create
+// export function addOnce(req, res) {
+//     if (!validationResult(req).isEmpty()) {
+//         res.status(400).json({errors: validationResult(req).array()});
+//     }
+//     else{
+//         Game
+//             .create(req.body)
+//             .then(newGame => {
+//                 res.status(200).json(newGame);
+//             })
+//             .catch(err => {
+//                 res.status(500).json({ error: err })
+//             })
+//     }
+// }
+
 export function addOnce(req, res) {
-    Game
-        .create(req.body)
-        .then(newGame => {
-            res.status(200).json(newGame);
-        })
-        .catch(err => {
-            res.status(500).json({ error: err })
-        })
+    if (!validationResult(req).isEmpty()) {
+        res.status(400).json({errors: validationResult(req).array()});
+    }
+    else{
+        Game
+            .create({
+                name: req.body.name,
+                year: req.body.year,
+                onSale: req.body.onSale,
+                image: `${req.protocol}://${req.get('host')}/img/${req.file.filename}`
+            })
+            .then(newGame => {
+                res.status(200).json(newGame);
+            })
+            .catch(err => {
+                res.status(500).json({ error: err })
+            })
+    }
 }
 
 

@@ -1,11 +1,3 @@
-import express from "express"
-import { addOnce, deleteAll, deleteOnce, getAll, getOnce, getOnceById, patchOnce, putAll } from "../controllers/game.js";
-
-
-
-const router = express.Router();
-
-
 
 // router.get('/game', (req, res) => {
 //     res.status(200).json(games);
@@ -65,10 +57,22 @@ const router = express.Router();
 //     })
 
 
+import express from "express"
+import { addOnce, deleteAll, deleteOnce, getAll, getOnce, getOnceById, patchOnce, putAll } from "../controllers/game.js";
+import { body } from "express-validator";
+import multer from '../middlewares/multer-config.js';
+
+const router = express.Router();
+
+
 router
     .route('/')
     .get(getAll)
-//.post(addOnce)
+    .post(
+        multer,
+        body('name').isLength({min : 5}),
+        body('year').isNumeric(),
+        addOnce);
 //.delete(deleteAll)
 
 router
